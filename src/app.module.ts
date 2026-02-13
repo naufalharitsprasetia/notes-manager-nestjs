@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtMiddleware } from './common/jwt.middleware';
+import { NotesModule } from './notes/notes.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { JwtMiddleware } from './common/jwt.middleware';
     }),
     UsersModule,
     AuthModule,
+    NotesModule,
   ],
   controllers: [AppController],
   providers: [],

@@ -1,0 +1,16 @@
+<%- include('../layouts/header') %>
+
+<h2>Create Note</h2>
+<form action="/notes/create" method="POST">
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+    <input type="text" class="form-control" name="title" required />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Content</label>
+    <textarea class="form-control" name="content" rows="5"></textarea>
+  </div>
+  <button type="submit" class="btn btn-success">Save</button>
+  <a href="/notes" class="btn btn-secondary">Cancel</a>
+</form>
+<%- include('../layouts/footer') %>

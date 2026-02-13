@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../models/user.entity';
@@ -23,29 +23,15 @@ export class UsersService {
     return this.userRepo.findOne({ where: { email } });
   }
 
-  // untuk proses login
-  async validateUser(email: string, plainPassword: string): Promise<User> {
-    const user = await this.findByEmail(email);
-
-    if (!user) {
-      throw new UnauthorizedException('User not found');
-    }
-
-    const isMatch = await bcrypt.compare(plainPassword, user.password);
-
-    if (!isMatch) {
-      throw new UnauthorizedException('Invalid password');
-    }
-
-    return user;
-  }
-
   // edit profile
   async updateUser(id: number, data: Partial<User>): Promise<User> {
     const user = await this.userRepo.findOne({ where: { id } });
     if (!user) throw new Error('User not found');
-
-    if (data.password) {
+    console.log(data);
+    if (data.password == '') {
+      // console.log(user);
+      data.password = await bcrypt.hash(user.password, 10);
+    } else if (data.password) {
       // hash password baru
       data.password = await bcrypt.hash(data.password, 10);
     }

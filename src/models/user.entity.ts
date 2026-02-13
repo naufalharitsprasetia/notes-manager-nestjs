@@ -4,7 +4,9 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { Note } from './note.entity';
 
 @Entity('users')
 export class User {
@@ -28,4 +30,8 @@ export class User {
 
   @UpdateDateColumn()
   updated_at!: Date;
+
+  // RELASI One-to-Many
+  @OneToMany(() => Note, (note) => note.user)
+  notes!: Note[];
 }

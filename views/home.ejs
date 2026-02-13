@@ -1,6 +1,13 @@
 <%- include('./layouts/header') %>
 <h2>Notes Manager</h2>
+<a href="/notes/create" class="btn btn-primary mb-3">Add Notes</a>
+<% if (success) { %>
+  <div class="alert alert-success"><%= success %></div>
+<% } %>
 <% if (message) { %>
   <div class="alert alert-success"><%= message %></div>
+<% } %>
+<% if (err) { %>
+  <div class="alert alert-danger"><%= err %></div>
 <% } %>
 <%- include('./layouts/footer') %>

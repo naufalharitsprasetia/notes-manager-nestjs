@@ -1,40 +1,51 @@
 <%- include('../layouts/header') %>
 
 <h2>Register</h2>
-
-<form method="POST" action="/register" class="col-md-4 mx-auto">
-  <!-- Username -->
-  <div class="mb-3">
-    <label class="form-label">Username</label>
-    <input type="text" name="username" class="form-control" required placeholder="Enter your username" />
+<% if (success) { %>
+  <div class="alert alert-success">
+    <%= success %>
   </div>
-
+<% } %>
+<% if (error) { %>
+  <div class="alert alert-danger">
+    <%= error %>
+  </div>
+<% } %>
+<form method="POST" action="/users/register" class="col-md-4 mx-auto">
   <!-- Name -->
   <div class="mb-3">
     <label class="form-label">Full Name</label>
-    <input type="text" name="name" class="form-control" required placeholder="Enter your full name" />
+    <input
+      type="text"
+      name="name"
+      class="form-control"
+      required
+      placeholder="Enter your full name"
+    />
   </div>
 
   <!-- Email -->
   <div class="mb-3">
     <label class="form-label">Email</label>
-    <input type="email" name="email" class="form-control" required placeholder="Enter your email" />
+    <input
+      type="email"
+      name="email"
+      class="form-control"
+      required
+      placeholder="Enter your email"
+    />
   </div>
 
   <!-- Password -->
   <div class="mb-3">
     <label class="form-label">Password</label>
-    <input type="password" name="password" class="form-control" required placeholder="Enter your password" />
-  </div>
-
-  <!-- Role -->
-  <div class="mb-3">
-    <label class="form-label">Role</label>
-    <select name="role" class="form-select" required>
-      <option value="">-- Select Role --</option>
-      <option value="user">User</option>
-      <option value="admin">Admin</option>
-    </select>
+    <input
+      type="password"
+      name="password"
+      class="form-control"
+      required
+      placeholder="Enter your password"
+    />
   </div>
 
   <button type="submit" class="btn btn-primary w-100">Register</button>

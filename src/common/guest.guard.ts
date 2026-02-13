@@ -1,22 +1,22 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Response } from 'express';
-import { RequestWithUser } from './types/request-with-user.interface';
+import type { RequestWithUser } from '../common/types/request-with-user.interface';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class GuestGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean {
     const request: RequestWithUser = context.switchToHttp().getRequest();
     const response: Response = context.switchToHttp().getResponse();
 
-    if (request.user) {
-      // user login → izinkan
+    if (!request.user) {
+      // belum login → biarkan akses
       return true;
     }
 
-    // user belum login → redirect ke /login dengan pesan
+    // sudah login → redirect ke dashboard/home
     response.redirect(
-      '/login?error=' + encodeURIComponent('Forbidden: You must login first'),
+      '/?error=' + encodeURIComponent('Forbidden: You must logout first'),
     );
-    return false; // jangan lanjutkan ke route
+    return false;
   }
 }

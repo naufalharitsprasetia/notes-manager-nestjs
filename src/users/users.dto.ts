@@ -9,9 +9,6 @@ import {
 
 export class CreateUserDto {
   @IsNotEmpty()
-  username!: string;
-
-  @IsNotEmpty()
   name!: string;
 
   @IsEmail()
@@ -19,6 +16,9 @@ export class CreateUserDto {
 
   @MinLength(6)
   password!: string;
+
+  @IsOptional()
+  role?: string;
 }
 
 export class UpdateUserDto {

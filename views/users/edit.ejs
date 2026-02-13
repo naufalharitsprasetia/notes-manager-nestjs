@@ -4,6 +4,12 @@
     <div class="card shadow-sm">
       <div class="card-body">
         <h2 class="card-title mb-4 text-center">Edit Profile</h2>
+        <% if (success) { %>
+          <div class="alert alert-success"><%= success %></div>
+        <% } %>
+        <% if (error) { %>
+          <div class="alert alert-danger"><%= error %></div>
+        <% } %>
         <form action="/users/edit" method="POST">
           <!-- Name -->
           <div class="mb-3">
