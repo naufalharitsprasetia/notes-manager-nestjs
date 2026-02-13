@@ -48,7 +48,7 @@ Aplikasi menggunakan **MySQL** dengan 2 tabel utama:
 
 ![Login Page](./screenshots/login.png)  
 ![Dashboard](./screenshots/dashboard.png)  
-![Notes Page](./screenshots/notes.png)
+![Home Page](./screenshots/home.png)
 
 ---
 
@@ -97,6 +97,8 @@ TypeOrmModule.forRoot({
   synchronize: true,
 })
 ```
+
+- ! PASTIKAN device anda telah terinstall mysql dan telah Nyala !
 
 Jalankan aplikasi:
 
