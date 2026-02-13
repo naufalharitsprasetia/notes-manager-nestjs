@@ -42,18 +42,6 @@ Aplikasi menggunakan **MySQL** dengan 2 tabel utama:
 - **User → Notes** : one-to-many
 - **Notes → User** : many-to-one
 
-**Diagram (placeholder)**:
-
-| User | ---------- | Note |
-
-| id | | id |
-| name | | title|
-| email | | content |
-| password | | userId |
-| role |
-
----
-
 ## 3. Screenshot Aplikasi
 
 > Ganti link di bawah ini dengan screenshot asli aplikasi
