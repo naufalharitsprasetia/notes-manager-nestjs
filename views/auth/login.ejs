@@ -1,0 +1,17 @@
+<%- include('../layouts/header') %>
+<h2>Login</h2>
+
+<form method="POST" action="/login" class="col-md-4">
+  <div class="mb-3">
+    <label>Email</label>
+    <input class="form-control" type="email" name="email" required />
+  </div>
+
+  <div class="mb-3">
+    <label>Password</label>
+    <input class="form-control" type="password" name="password" required />
+  </div>
+
+  <button class="btn btn-primary w-100">Login</button>
+</form>
+<%- include('../layouts/footer') %>
