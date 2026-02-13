@@ -1,13 +1,13 @@
-# Notes Manager
+# Notes Manager App
 
 ## 1. Penjelasan Project
 
-**Notes Manager** adalah aplikasi manajemen catatan (notes) berbasis web yang dibangun menggunakan **NestJS, TypeScript, TypeORM, MySQL, dan EJS**.  
+**Notes Manager App** adalah aplikasi manajemen catatan (notes) berbasis web yang dibangun menggunakan **NestJS, TypeScript, TypeORM, MySQL, dan EJS**.  
 Aplikasi ini memungkinkan pengguna untuk:
 
-- Mendaftar dan login
-- Mengelola catatan pribadi (CRUD)
-- Melihat catatan berdasarkan user yang login
+- Mendaftar (membuat akun) dan login
+- Mengelola catatan pribadi / notes (CRUD)
+- Mencari catatan
 - Admin memiliki hak istimewa untuk mengelola semua user dan catatan
 
 Tujuan project ini adalah menyediakan **aplikasi CRUD sederhana** dengan arsitektur yang rapi dan mudah dikembangkan.
@@ -16,7 +16,7 @@ Tujuan project ini adalah menyediakan **aplikasi CRUD sederhana** dengan arsitek
 
 ## 2. Desain Database
 
-Aplikasi menggunakan **MySQL** dengan tabel utama:
+Aplikasi menggunakan **MySQL** dengan 2 tabel utama:
 
 ### Tabel `user`
 
@@ -73,9 +73,8 @@ Project ini menggunakan beberapa dependency utama:
 - `typeorm` → Object-Relational Mapping
 - `mysql2` → MySQL driver
 - `bcrypt` → Password hashing
-- `express-session` → Session management
-- `connect-flash` → Flash message untuk error/success
 - `ejs` → Template engine untuk rendering HTML
+- `jwt` → Autentikasi berbasis token
 
 > Opsional: `class-validator`, `class-transformer`, `rxjs` (bisa dihapus jika tidak digunakan)
 
@@ -86,8 +85,8 @@ Project ini menggunakan beberapa dependency utama:
 1. Clone repository:
 
 ```bash
-git clone https://github.com/username/notes-manager.git
-cd notes-manager
+git clone https://github.com/naufalharitsprasetia/notes-manager-nestjs.git
+cd notes-manager-nestjs
 ```
 
 Install dependencies:
@@ -129,7 +128,7 @@ Seeder Admin:
 Secara otomatis akan membuat user admin saat aplikasi pertama kali dijalankan:
 
 ```makefile
-Email: admin@example.com
+Email: admin@gmail.com
 Password: admin123
 ```
 
@@ -137,27 +136,29 @@ Folder Structure:
 
 ```bash
 src/
-users/ # User entity, service, controller
-notes/ # Notes entity, service, controller
-validation.service.ts # Helper validasi manual
-main.ts # Bootstrap app + create admin
+├── users/        # User module, service, controller
+├── notes/        # Notes module, service, controller
+├── common/       # Global helpers, guards, decorators
+├── main.ts       # Entry point aplikasi
 ```
 
-Views:
+## 7. Pola Arsitektur (MVC)
 
-- Disimpan di views/ menggunakan EJS, termasuk layout dan halaman notes, register, login, edit profile.
+Project ini menerapkan pattern Model-View-Controller (MVC):
 
-Session & Flash Message:
+### Model
 
-- Menggunakan express-session + connect-flash untuk error/success message.
+Menggunakan Entity dari TypeORM untuk merepresentasikan tabel database
 
-Future Dev Notes:
+### View
 
-- Bisa tambahkan fitur kategori, tag, atau share notes.
-- Untuk production, jangan gunakan synchronize: true di TypeORM, gunakan migration.
-- Flash message bisa diganti dengan library front-end seperti toastr atau sweetalert.
+Menggunakan EJS, berada di folder /views, bertanggung jawab pada tampilan/UI
 
-## 7. Author
+### Controller
+
+Mengatur alur request dan response, berada di masing-masing module
+
+## 8. Author
 
 Naufal Harits Prasetia
 

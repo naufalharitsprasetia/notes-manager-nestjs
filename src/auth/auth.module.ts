@@ -8,7 +8,7 @@ import { UsersModule } from '../users/users.module';
   imports: [
     UsersModule,
     JwtModule.register({
-      secret: 'SECRET_KEY_JANGAN_DI_HARDCODE_NANTI',
+      secret: 'DAFTARINTERNDOT2026',
       signOptions: { expiresIn: '1d' },
     }),
   ],
