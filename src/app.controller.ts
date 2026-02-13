@@ -21,12 +21,16 @@ export class AppController {
     const err = error ? decodeURIComponent(error) : null;
     let notes: Note[];
 
-    if (query) {
-      // search notes berdasarkan keyword
-      notes = await this.notesService.searchNotes(user!.id, query);
+    if (user) {
+      if (query) {
+        // search notes berdasarkan keyword
+        notes = await this.notesService.searchNotes(user.id, query);
+      } else {
+        // ambil semua notes user
+        notes = await this.notesService.getNotesByUserId(user);
+      }
     } else {
-      // ambil semua notes user
-      notes = await this.notesService.getNotesByUserId(user!);
+      notes = [];
     }
 
     return { title: 'Home', user, message, err, success, notes, query };

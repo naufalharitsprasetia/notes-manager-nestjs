@@ -34,7 +34,6 @@ export class UsersService {
       // hash password baru
       data.password = await bcrypt.hash(data.password, 10);
     }
-    console.log(data);
     Object.assign(user, data);
     return this.userRepo.save(user);
   }

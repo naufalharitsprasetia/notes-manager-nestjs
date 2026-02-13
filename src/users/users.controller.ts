@@ -100,7 +100,6 @@ export class UsersController {
     @Res() res: Response,
   ) {
     const userId = req.user?.id;
-    console.log(req.user);
     if (!userId) return res.redirect('/login');
     try {
       await this.usersService.updateUser(userId, updateDto);
