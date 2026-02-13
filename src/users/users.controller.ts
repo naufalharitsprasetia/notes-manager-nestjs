@@ -65,6 +65,17 @@ export class UsersController {
     }
   }
 
+  // Tampilkan halaman detail profile
+  @UseGuards(AuthGuard)
+  @Get('detail')
+  @Render('users/detail')
+  async detail(@Req() req: RequestWithUser) {
+    if (!req.user) return { user: null }; // user belum login
+    const user = await this.usersService.findById(req.user.id);
+
+    return { title: 'Detail Profile Page', user };
+  }
+
   // Tampilkan halaman edit profile
   @UseGuards(AuthGuard)
   @Get('edit')

@@ -27,17 +27,22 @@ export class UsersService {
   async updateUser(id: number, data: Partial<User>): Promise<User> {
     const user = await this.userRepo.findOne({ where: { id } });
     if (!user) throw new Error('User not found');
-    console.log(data);
     if (data.password == '') {
       // console.log(user);
-      data.password = await bcrypt.hash(user.password, 10);
+      delete data.password;
     } else if (data.password) {
       // hash password baru
       data.password = await bcrypt.hash(data.password, 10);
     }
-
+    console.log(data);
     Object.assign(user, data);
     return this.userRepo.save(user);
+  }
+
+  async getAllUsers() {
+    return this.userRepo.find({
+      order: { id: 'ASC' },
+    });
   }
 
   async findById(id: number): Promise<User | null> {

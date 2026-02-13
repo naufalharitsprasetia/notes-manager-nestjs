@@ -1,0 +1,70 @@
+<%- include('../layouts/header') %>
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="card-title mb-4 text-center">Your Profile</h2>
+        <!-- Name -->
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            value="<%= user.name %>"
+            readonly
+            disabled
+          />
+        </div>
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            value="<%= user.email %>"
+            readonly
+            disabled
+          />
+        </div>
+        <!-- Role -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Role</label>
+          <input
+            type="text"
+            class="form-control"
+            value="<%= user.role %>"
+            readonly
+            disabled
+          />
+        </div>
+        <!-- created at -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Created At</label>
+          <input
+            type="text"
+            class="form-control"
+            value="<%= user.created_at %>"
+            readonly
+            disabled
+          />
+        </div>
+        <!-- last updated -->
+        <div class="mb-3">
+          <label for="email" class="form-label">Last Updated At</label>
+          <input
+            type="text"
+            class="form-control"
+            value="<%= user.updated_at %>"
+            readonly
+            disabled
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../layouts/footer') %>

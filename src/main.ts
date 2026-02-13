@@ -4,7 +4,7 @@ import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import cookieParser from 'cookie-parser';
 import { UsersService } from './users/users.service';
-import bcrypt from 'bcrypt';
+import { CreateUserDto } from './users/users.dto';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -22,17 +22,17 @@ async function bootstrap() {
 }
 
 async function createAdmin(usersService: UsersService) {
-  const adminEmail = 'admin@example.com';
+  const adminEmail = 'admin@gmail.com';
   const existingAdmin = await usersService.findByEmail(adminEmail);
 
   if (!existingAdmin) {
-    const hashedPassword = await bcrypt.hash('admin123', 10);
-    await usersService.create({
+    const userAdmin: CreateUserDto = {
       name: 'Admin',
       email: adminEmail,
-      password: hashedPassword,
+      password: 'admin123',
       role: 'admin',
-    });
+    };
+    await usersService.create(userAdmin);
     console.log('✅ Admin user created automatically!');
   } else {
     console.log('ℹ️ Admin already exists');

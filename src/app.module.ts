@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { JwtMiddleware } from './common/jwt.middleware';
 import { NotesModule } from './notes/notes.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { NotesModule } from './notes/notes.module';
     UsersModule,
     AuthModule,
     NotesModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [],

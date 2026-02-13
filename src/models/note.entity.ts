@@ -20,10 +20,10 @@ export class Note {
   content!: string;
 
   @CreateDateColumn()
-  createdAt!: Date;
+  created_at!: Date;
 
   @UpdateDateColumn()
-  updatedAt!: Date;
+  updated_at!: Date;
 
   // RELASI ke User
   @ManyToOne(() => User, (user) => user.notes, { onDelete: 'CASCADE' })

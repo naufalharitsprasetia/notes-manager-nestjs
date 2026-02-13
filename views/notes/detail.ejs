@@ -1,0 +1,24 @@
+<%- include('../layouts/header', { title: title }) %>
+
+<div class="container mt-5">
+  <h2>Note Detail</h2>
+
+  <div class="card mt-3">
+    <div class="card-header">
+      <h4><%= note.title %></h4>
+      <small>Created by: <%= note.user.name %></small>
+    </div>
+    <div class="card-body">
+      <p><%= note.content %></p>
+    </div>
+    <div class="card-footer">
+      <a href="/notes" class="btn btn-secondary">Back to Notes</a>
+      <a href="/notes/edit/<%= note.id %>" class="btn btn-primary">Edit</a>
+      <form action="/notes/delete/<%= note.id %>" method="POST" class="d-inline">
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../layouts/footer') %>

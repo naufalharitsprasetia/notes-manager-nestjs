@@ -1,6 +1,20 @@
 <%- include('./layouts/header') %>
-<h2>Notes Manager</h2>
-<a href="/notes/create" class="btn btn-primary mb-3">Add Notes</a>
+
+<h2 class="mb-3">My Notes</h2>
+
+<form method="GET" action="/" class="mb-3 d-flex">
+  <input
+    type="text"
+    name="q"
+    class="form-control me-2"
+    placeholder="Search notes..."
+    value="<%= query || '' %>"
+  />
+  <button type="submit" class="btn btn-outline-primary">Search</button>
+</form>
+
+<a href="/notes/create" class="btn btn-primary mb-3">+ Add Note</a>
+
 <% if (success) { %>
   <div class="alert alert-success"><%= success %></div>
 <% } %>
@@ -10,4 +24,29 @@
 <% if (err) { %>
   <div class="alert alert-danger"><%= err %></div>
 <% } %>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+  <% notes.forEach(note => { %>
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-header">
+          <h5 class="fw-bold fs-4 mt-2"><%= note.title %></h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text text-break"><%= note.content %></p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <a href="/notes/detail/<%= note.id %>" class="btn btn-sm btn-outline-secondary">Detail</a>
+          <div>
+            <a href="/notes/edit/<%= note.id %>" class="btn btn-sm btn-outline-primary">Edit</a>
+            <form action="/notes/delete/<%= note.id %>" method="POST" class="d-inline">
+              <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
 <%- include('./layouts/footer') %>

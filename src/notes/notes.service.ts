@@ -16,6 +16,17 @@ export class NotesService {
     return this.noteRepository.save(note);
   }
 
+  async searchNotes(userId: number, keyword: string): Promise<Note[]> {
+    return this.noteRepository
+      .createQueryBuilder('note')
+      .where('note.userId = :userId', { userId })
+      .andWhere('(note.title LIKE :keyword OR note.content LIKE :keyword)', {
+        keyword: `%${keyword}%`,
+      })
+      .orderBy('note.id', 'DESC')
+      .getMany();
+  }
+
   async getNotesByUserId(user: User): Promise<Note[]> {
     return this.noteRepository.find({
       where: { user: { id: user.id } },
@@ -44,5 +55,11 @@ export class NotesService {
 
   async deleteNote(id: number): Promise<void> {
     await this.noteRepository.delete(id);
+  }
+  async getAllNotes() {
+    return this.noteRepository.find({
+      relations: ['user'],
+      order: { created_at: 'DESC' },
+    });
   }
 }

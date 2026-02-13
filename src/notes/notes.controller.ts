@@ -9,6 +9,7 @@ import {
   Body,
   UseGuards,
   Render,
+  NotFoundException,
 } from '@nestjs/common';
 import type { Response } from 'express';
 import { NotesService } from './notes.service';
@@ -26,7 +27,6 @@ export class NotesController {
   async index(@Req() req: RequestWithUser) {
     const user = req.user;
     const notes = await this.notesService.getNotesByUserId(user!);
-    console.log(notes);
     return { title: 'My Notes', notes, user };
   }
 
@@ -73,6 +73,31 @@ export class NotesController {
     const { title, content } = body;
     await this.notesService.updateNote(Number(id), title, content);
     res.redirect('/notes');
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('detail/:id')
+  @Render('notes/detail')
+  async detail(
+    @Param('id') id: string,
+    @Req() req: RequestWithUser,
+    @Res() res: Response,
+  ) {
+    const noteId = parseInt(id, 10);
+    const userId = req.user?.id;
+    const note = await this.notesService.getNoteById(noteId);
+    if (!note) {
+      throw new NotFoundException('Note not found');
+    }
+    // hanya owner yang bisa lihat
+    if (note.user.id !== userId) {
+      return res.redirect(
+        '/notes?error=' +
+          encodeURIComponent('You are not allowed to view this note'),
+      );
+    }
+
+    return { note, user: req.user, title: 'Note Detail' };
   }
 
   // DELETE NOTE
